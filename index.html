@@ -62,7 +62,7 @@
             const startText = document.getElementById('startText').value;
             const length = document.getElementById('length').value;
 
-            const response = await fetch('deepspaceai.pythonanywhere.com/text_completion', {
+            const response = await fetch('https://deepspaceai.pythonanywhere.com/text_completion', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -72,8 +72,12 @@
         
             const result = await response.json();
             const generatedText = result.generated_text;
-        
-            document.getElementById('startText').value += generatedText;
+
+            for (let i = 0; i < generatedText.length; i++){
+                setTimeout(function(){
+                    document.getElementById('startText').value += generatedText[i] + ' ';
+                }, 100)
+            }
         });
     </script>
 </body>
