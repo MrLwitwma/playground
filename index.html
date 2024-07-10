@@ -3,82 +3,95 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Text Generator</title>
+    <title>Playground for models made by MrLwitwma</title>
+
     <style>
-        body {
-            font-family: Arial, sans-serif;
+        body{
+            background: #ddd;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+        }
+
+        h1{
+            text-align: center;
+            font-family: Arial, Helvetica, sans-serif;
+            margin-top: 50px;
+            animation: change 1s infinite;
+        }
+
+        @keyframes change{
+            0%, 100%{
+                background: linear-gradient(to top, red, blue);
+            background-clip: text;
+            color: transparent;
+            } 50%{
+                background: linear-gradient(to bottom, red, blue);
+            background-clip: text;
+            color: transparent;
+            }
+        }
+
+        .models{
+            height: 120px;
+            width: 170px;
+            border-radius: 30px;
+            background: linear-gradient(to bottom right, blue, cyan);
+            padding: 20px;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #f0f0f0;
-        }
-
-        .container {
             text-align: center;
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            font-weight: bold;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size:  18px;
+            text-decoration: none;
+            color: #fff;
+            margin-top: 20px;
+            transition: 0.2s linear;
+        }
+        .models:hover{
+            scale: 1.1;
         }
 
-        textarea {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 10px;
+        main{
+            align-self: center;
+            width: 90%;
+            max-width: 1600px;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
         }
 
-        input {
-            padding: 10px;
-            margin-bottom: 10px;
-        }
-
-        button {
-            padding: 10px 20px;
-            background-color: #007BFF;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background-color: #0056b3;
+        footer{
+            height: 500px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Text Generator</h1>
-        <textarea id="startText" rows="10" cols="50" placeholder="Enter your starting sentence here..."></textarea>
-        <br>
-        <input type="number" id="length" placeholder="Enter length">
-        <br>
-        <button id="generateBtn">Generate Text</button>
-    </div>
-    <script>
-        document.getElementById('generateBtn').addEventListener('click', async () => {
-            const startText = document.getElementById('startText').value;
-            const length = document.getElementById('length').value;
+    
+    <h1>Welcome to your AI Playground</h1>
+    <!-- <div>
+        <span id="changing_text">Text Genrating Model</span>|
+    </div> -->
 
-            const response = await fetch('https://deepspaceai.pythonanywhere.com/text_completion', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ text: startText, length: length }),
-            });
-        
-            const result = await response.json();
-            const generatedText = result.generated_text;
+    <main>
+        <a href="/text_completion/" class="models">
+            Text Completion Model
+        </a>
+        <a href="" class="models">
+            Image Generating Model
+        </a>
+        <a href="https://lina.mrlwitwma.in" class="models">
+            Lina (Langauge Model)
+        </a>
+    </main>
 
-            for (let i = 0; i < generatedText.length; i++){
-                setTimeout(function(){
-                    document.getElementById('startText').value += generatedText[i] + ' ';
-                }, 100)
-            }
-        });
-    </script>
+    <footer>
+        &copy;MrLwitwma
+    </footer>
 </body>
 </html>
